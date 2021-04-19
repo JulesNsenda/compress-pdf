@@ -18,10 +18,24 @@ public class Main
     public static void main(String[] args)
             throws IOException
     {
-        File out = File.createTempFile("compressed-file", ".pdf");
+        if (args.length < 2){
+            System.err.println("Usage: compress-pdf.jar <input_file_location> <output_file_location>");
+            return;
+        }
+
+        String inFileLocation = args[0];
+        File in = new File(inFileLocation);
+        if (!in.exists()){
+            System.err.println("No such file found: " + inFileLocation);
+            return;
+        }
+
+        String outFileLocation = args[1];
+        File out = new File(outFileLocation);
+
         System.out.println("Start compression...");
-        compressPdf(new File("/home/jules/Downloads/books/finished/CLOSURE.pdf"), out);
-        System.out.println("End compression..");
+        compressPdf(in, out);
+        System.out.println("End compression...");
     }
 
     public static void compressPdf(File in, File out)
