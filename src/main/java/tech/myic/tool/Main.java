@@ -20,14 +20,14 @@ public class Main
     {
         if (args.length < 2){
             System.err.println("Usage: compress-pdf.jar <input_file_location> <output_file_location>");
-            return;
+            System.exit(1);
         }
 
         String inFileLocation = args[0];
         File in = new File(inFileLocation);
         if (!in.exists()){
             System.err.println("No such file found: " + inFileLocation);
-            return;
+            System.exit(1);
         }
 
         String outFileLocation = args[1];
