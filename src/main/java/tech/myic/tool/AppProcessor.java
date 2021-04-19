@@ -13,13 +13,13 @@ import org.apache.pdfbox.pdmodel.graphics.image.JPEGFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
-public class Main
+public class AppProcessor
 {
     public static void main(String[] args)
             throws IOException
     {
         if (args.length < 2){
-            System.err.println("Usage: compress-pdf.jar <input_file_location> <output_file_location>");
+            AppHelper.showHelpMessage();
             System.exit(1);
         }
 
