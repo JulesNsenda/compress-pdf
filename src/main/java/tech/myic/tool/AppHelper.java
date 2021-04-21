@@ -14,7 +14,7 @@ public class AppHelper
         Helper.displayHelpMessage(getAppParameter(), "compress-pdf");
     }
 
-    private static AppParameter getAppParameter()
+    public static AppParameter getAppParameter()
     {
         return new AppParameter.Builder()
                 .NumberOfParameters(2)
