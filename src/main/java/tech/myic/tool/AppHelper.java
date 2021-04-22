@@ -25,8 +25,8 @@ public class AppHelper
     private static List<CmdOption> getCmdOptions()
     {
         List<CmdOption> cmdOptions = new LinkedList<>();
-        cmdOptions.add(CmdOption.createCmdOption("-in=", "Input file location"));
-        cmdOptions.add(CmdOption.createCmdOption("-out=", "Output file location"));
+        cmdOptions.add(CmdOption.createCmdOption("-in=", "Input file location", "Compulsory - Specify input file location"));
+        cmdOptions.add(CmdOption.createCmdOption("-out=", "Output file location", "Compulsory - Specify output file location"));
         return cmdOptions;
     }
 }
