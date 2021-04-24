@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class AppProcessor
 {
-    private static final FileCompressor fileCompressor = new FileCompressor();
+    private static final PdfFileCompressor PDF_FILE_COMPRESSOR = new PdfFileCompressor();
 
     public static void main(String[] args)
     {
@@ -31,7 +31,7 @@ public class AppProcessor
             System.out.println("Start compression...");
             compressPdf(in, out);
             System.out.println("File compressed successfully");
-        }catch (CompressPdfException e){
+        }catch (FileCompressException e){
             System.err.println("Error compressing file " + e);
             System.exit(1);
         }
@@ -44,23 +44,23 @@ public class AppProcessor
     }
 
     private static File getInputFile(String[] args)
-            throws CompressPdfException
+            throws FileCompressException
     {
         String inFileLocation = args[0];
         File in = new File(inFileLocation);
         if (!in.exists()){
-            throw new CompressPdfException("No such file found: " + inFileLocation);
+            throw new FileCompressException("No such file found: " + inFileLocation);
         }
         return in;
     }
 
     private static void compressPdf(File in, File out)
-            throws CompressPdfException
+            throws FileCompressException
     {
         try {
-            fileCompressor.compress(in, out);
+            PDF_FILE_COMPRESSOR.compress(in, out);
         }catch (IOException e){
-            throw new CompressPdfException("Error compressing file: " + in.getAbsolutePath());
+            throw new FileCompressException("Error compressing file: " + in.getAbsolutePath());
         }
     }
 

@@ -13,7 +13,7 @@ import org.apache.pdfbox.pdmodel.graphics.image.JPEGFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
-public class FileCompressor
+public class PdfFileCompressor
         implements Compressible
 {
     @Override

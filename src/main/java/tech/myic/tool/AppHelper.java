@@ -10,9 +10,9 @@ public class AppHelper
         implements Helper
 {
 
-    private int numberOfParameters;
-    private String applicationName;
-    private String applicationDescription;
+    private final int numberOfParameters;
+    private final String applicationName;
+    private final String applicationDescription;
 
     public AppHelper(Builder builder)
     {
