@@ -40,6 +40,7 @@ public class AppProcessor
     private static File getOutputFile(String[] args)
     {
         String outFileLocation = args[1];
+        outFileLocation = outFileLocation.replace("-in=", "");
         return new File(outFileLocation);
     }
 
@@ -47,6 +48,7 @@ public class AppProcessor
             throws FileCompressException
     {
         String inFileLocation = args[0];
+        inFileLocation = inFileLocation.replace("-in=", "");
         File in = new File(inFileLocation);
         if (!in.exists()){
             throw new FileCompressException("No such file found: " + inFileLocation);
