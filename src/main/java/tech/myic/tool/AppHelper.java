@@ -7,26 +7,89 @@ import tech.myic.lib.CmdOption;
 import tech.myic.lib.Helper;
 
 public class AppHelper
+        implements Helper
 {
 
-    public static void showHelpMessage()
+    private int numberOfParameters;
+    private String applicationName;
+    private String applicationDescription;
+
+    public AppHelper(Builder builder)
     {
-        Helper.displayHelpMessage(getAppParameter(), "compress-pdf");
+        this.applicationDescription = builder.applicationDescription;
+        this.applicationName = builder.applicationName;
+        this.numberOfParameters = builder.numberOfParameters;
     }
 
-    public static AppParameter getAppParameter()
+    public void showHelpMessage()
+    {
+        Helper.displayHelpMessage(getApplicationParameter(), getApplicationName(), getApplicationDescription());
+    }
+
+    @Override
+    public String getApplicationDescription()
+    {
+        return this.applicationDescription;
+    }
+
+    @Override
+    public AppParameter getApplicationParameter()
     {
         return new AppParameter.Builder()
-                .NumberOfParameters(2)
+                .NumberOfParameters(getNumberOfParameters())
                 .CmdOptions(getCmdOptions())
                 .build();
     }
 
-    private static List<CmdOption> getCmdOptions()
+    @Override
+    public String getApplicationName()
+    {
+        return this.applicationName;
+    }
+
+    @Override
+    public List<CmdOption> getCmdOptions()
     {
         List<CmdOption> cmdOptions = new LinkedList<>();
         cmdOptions.add(CmdOption.createCmdOption("-in=", "Input file location", "Compulsory - Specify input file location"));
         cmdOptions.add(CmdOption.createCmdOption("-out=", "Output file location", "Compulsory - Specify output file location"));
+
         return cmdOptions;
+    }
+
+    @Override
+    public int getNumberOfParameters()
+    {
+        return this.numberOfParameters;
+    }
+
+    public static class Builder
+    {
+        private int numberOfParameters;
+        private String applicationName;
+        private String applicationDescription;
+
+        public Builder numberOfParameters(int numberOfParameters)
+        {
+            this.numberOfParameters = numberOfParameters;
+            return this;
+        }
+
+        public Builder applicationName(String applicationName)
+        {
+            this.applicationName = applicationName;
+            return this;
+        }
+
+        public Builder applicationDescription(String applicationDescription)
+        {
+            this.applicationDescription = applicationDescription;
+            return this;
+        }
+
+        public AppHelper build()
+        {
+            return new AppHelper(this);
+        }
     }
 }

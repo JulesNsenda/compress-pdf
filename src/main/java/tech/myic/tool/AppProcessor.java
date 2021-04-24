@@ -9,12 +9,18 @@ public class AppProcessor
 
     public static void main(String[] args)
     {
+        AppHelper appHelper = new AppHelper.Builder()
+                .applicationDescription("This application allows you to compress a PDF file at 150 DPI per page to keep the quality of the document.")
+                .applicationName("compress-pdf")
+                .numberOfParameters(2)
+                .build();
+
         try {
             if (args.length == 1 && (args[0].equals("?")) || (args[0].equals("--help")) || args[0].equals("-h")){
-                AppHelper.showHelpMessage();
+                appHelper.showHelpMessage();
                 return;
-            }else if (args.length < AppHelper.getAppParameter().getNumberOfParameters()){
-                AppHelper.showHelpMessage();
+            }else if (args.length < appHelper.getNumberOfParameters()){
+                appHelper.showHelpMessage();
                 System.exit(1);
             }
 
