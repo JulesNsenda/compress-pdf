@@ -72,6 +72,7 @@ public class AppProcessor
     public static float getDpi(String[] args)
     {
         String dpiString = args[2];
+        dpiString = dpiString.replace("-dpi=", "");
         return Float.parseFloat(dpiString);
     }
 
