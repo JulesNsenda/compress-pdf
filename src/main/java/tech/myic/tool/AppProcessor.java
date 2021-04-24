@@ -31,16 +31,17 @@ public class AppProcessor
             System.out.println("Start compression...");
             compressPdf(in, out, dpi);
             System.out.println("File compressed successfully");
-        }catch (FileCompressException e){
+        }catch (FileCompressException | IOException e){
             System.err.println("Error compressing file " + e);
             System.exit(1);
         }
+
     }
 
     private static File getOutputFile(String[] args)
     {
         String outFileLocation = args[1];
-        outFileLocation = outFileLocation.replace("-in=", "");
+        outFileLocation = outFileLocation.replace("-out=", "");
         return new File(outFileLocation);
     }
 
@@ -57,16 +58,11 @@ public class AppProcessor
     }
 
     private static void compressPdf(File in, File out, float dpi)
-            throws FileCompressException
+            throws FileCompressException, IOException
     {
         PdfFileCompressor pdfFileCompressor = new PdfFileCompressor();
         pdfFileCompressor.setDpi(dpi);
-
-        try {
-            pdfFileCompressor.compress(in, out);
-        }catch (IOException e){
-            throw new FileCompressException("Error compressing file: " + in.getAbsolutePath());
-        }
+        pdfFileCompressor.compress(in, out);
     }
 
     public static float getDpi(String[] args)
