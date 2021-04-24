@@ -5,14 +5,12 @@ import java.io.IOException;
 
 public class AppProcessor
 {
-    private static final PdfFileCompressor PDF_FILE_COMPRESSOR = new PdfFileCompressor();
-
     public static void main(String[] args)
     {
         AppHelper appHelper = new AppHelper.Builder()
                 .applicationDescription("This application allows you to compress a PDF file at 150 DPI per page to keep the quality of the document.")
                 .applicationName("compress-pdf")
-                .numberOfParameters(2)
+                .numberOfParameters(3)
                 .build();
 
         try {
@@ -28,8 +26,10 @@ public class AppProcessor
 
             File out = getOutputFile(args);
 
+            float dpi = getDpi(args);
+
             System.out.println("Start compression...");
-            compressPdf(in, out);
+            compressPdf(in, out, dpi);
             System.out.println("File compressed successfully");
         }catch (FileCompressException e){
             System.err.println("Error compressing file " + e);
@@ -54,14 +54,23 @@ public class AppProcessor
         return in;
     }
 
-    private static void compressPdf(File in, File out)
+    private static void compressPdf(File in, File out, float dpi)
             throws FileCompressException
     {
+        PdfFileCompressor pdfFileCompressor = new PdfFileCompressor();
+        pdfFileCompressor.setDpi(dpi);
+
         try {
-            PDF_FILE_COMPRESSOR.compress(in, out);
+            pdfFileCompressor.compress(in, out);
         }catch (IOException e){
             throw new FileCompressException("Error compressing file: " + in.getAbsolutePath());
         }
+    }
+
+    public static float getDpi(String[] args)
+    {
+        String dpiString = args[2];
+        return Float.parseFloat(dpiString);
     }
 
 }

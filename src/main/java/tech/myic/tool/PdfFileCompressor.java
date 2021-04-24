@@ -16,6 +16,13 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 public class PdfFileCompressor
         implements Compressible
 {
+    private float dpi;
+
+    public void setDpi(float dpi)
+    {
+        this.dpi = dpi;
+    }
+
     @Override
     public void compress(File in, File out)
             throws IOException
@@ -29,7 +36,7 @@ public class PdfFileCompressor
                 for (int i = 0; i < numberOfPages; i++){
                     System.out.println("Dealing with page: " + (i + 1) + "/" + numberOfPages);
                     page = new PDPage(PDRectangle.A4);
-                    BufferedImage bim = new PDFRenderer(doc).renderImageWithDPI(i, 150);
+                    BufferedImage bim = new PDFRenderer(doc).renderImageWithDPI(i, this.dpi);
                     PDImageXObject pdImage = JPEGFactory.createFromImage(pdDocument, bim);
                     try (PDPageContentStream contentStream = new PDPageContentStream(pdDocument, page)) {
                         contentStream.drawImage(pdImage, 0, 0, PDRectangle.A4.getWidth(), PDRectangle.A4.getHeight());

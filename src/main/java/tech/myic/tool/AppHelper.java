@@ -53,6 +53,7 @@ public class AppHelper
         List<CmdOption> cmdOptions = new LinkedList<>();
         cmdOptions.add(CmdOption.createCmdOption("-in=", "Input file location", "Compulsory - Specify input file location"));
         cmdOptions.add(CmdOption.createCmdOption("-out=", "Output file location", "Compulsory - Specify output file location"));
+        cmdOptions.add(CmdOption.createCmdOption("-dpi=", "Dot per inch", "Compulsory - Resolution of the image on the page"));
 
         return cmdOptions;
     }
