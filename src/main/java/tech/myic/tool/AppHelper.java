@@ -9,7 +9,6 @@ import tech.myic.lib.Helper;
 public class AppHelper
         implements Helper
 {
-
     private final int numberOfParameters;
     private final String applicationName;
     private final String applicationDescription;
